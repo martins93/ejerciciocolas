@@ -181,7 +181,7 @@ public class FrmColaDeportes extends javax.swing.JFrame {
         //agrego filas
         
         for (int i = 0; i < cantidadSim; i++) {
-                listaFilas.generarNuevaFila(); 
+                listaFilas.generarNuevoEvento(); 
         }
         Object [] fila = new Object[11];
         filas = listaFilas.getListaFilas();

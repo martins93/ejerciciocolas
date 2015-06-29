@@ -28,6 +28,7 @@ public class Fila {
     private double tiempoOcupacion;
     private double finOcupacion;
     private double proxLlegada;
+    private Fila[] cancha;
     
     public Fila()
     {
@@ -47,6 +48,9 @@ public class Fila {
         this.tiempoEntreLlegadas = deporte.generarTiempoEntreLlegada();
         this.rndLlegadaDeporte = deporte.getRandomProx();
         this.proxLlegada = tiempoEntreLlegadas;
+        this.cancha = new Fila[2];
+        cancha[0] =null;
+        cancha[1] =null;
     }
 
     
@@ -72,6 +76,16 @@ public class Fila {
     public double getRndDeporte() {
         return rndDeporte;
     }
+
+    public Fila[] getCancha() {
+        return cancha;
+    }
+
+    public void setCancha(Fila[] cancha) {
+        this.cancha = cancha;
+    }
+    
+    
 
     public void setRndDeporte(double rndDeporte) {
         this.rndDeporte = rndDeporte;

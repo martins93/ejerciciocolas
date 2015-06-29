@@ -17,4 +17,5 @@ public interface Deporte
     public double getRandomTiempo();
     public double getTiempoDeOcupacion();
     public double getTiempoEntreLlegada();
+    public String getNombre();
 }

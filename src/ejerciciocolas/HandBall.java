@@ -12,6 +12,8 @@ import ejerciciocolas.Deporte;
  * @author Martin
  */
 public class HandBall implements Deporte{
+    private String nombre = "Handball";
+    
     private double randomProx;
     private double randomTiempo;
     
@@ -45,7 +47,6 @@ public class HandBall implements Deporte{
     @Override
     public double generarTiempoDeOcupacion() {
 
-
         double rnd1;
         double rnd2;
 
@@ -62,6 +63,12 @@ public class HandBall implements Deporte{
     
     //Getters and Setters
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    
+    
     @Override
     public double getRandomProx() {
         return randomProx;

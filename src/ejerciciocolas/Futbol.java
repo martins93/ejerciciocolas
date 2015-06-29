@@ -10,35 +10,30 @@ package ejerciciocolas;
  * @author Martin
  */
 public class Futbol implements Deporte {
+
+    private String nombre = "Futbol";
+
     private double randomProx;
     private double randomTiempo;
-    
+
     private double tiempoEntreLlegada;
     private double tiempoDeOcupacion;
-    
-    public Futbol()
-    {
-      
+
+    public Futbol() {
+
     }
-    
-    
+
     @Override
     public double generarTiempoEntreLlegada() {
-        
-      
+
         randomProx = Math.random();
         tiempoEntreLlegada = -(Math.log(1 - randomProx) * 10);
-       
-        
 
-       
         return (tiempoEntreLlegada);
     }
 
     @Override
     public double generarTiempoDeOcupacion() {
-        
-    
 
         double rnd1;
         double rnd2;
@@ -48,20 +43,20 @@ public class Futbol implements Deporte {
 
         randomTiempo = Math.sqrt(-2 * Math.log10(rnd1)) * Math.cos(2 * (Math.PI) * rnd2);
 
-        
-       //tiempoDeOcupacion = (90.0/60.0) + (randomTiempo * (10.0/60.0));
+        // tiempoDeOcupacion = (90.0/60.0) + (randomTiempo * (10.0/60.0));
         tiempoDeOcupacion = 20.0;
-       
 
-        
- 
         return tiempoDeOcupacion;
-        
 
     }
-    
+
     //Getters and Setters
 
+    public String getNombre() {
+        return nombre;
+    }
+    
+    
     @Override
     public double getRandomProx() {
         return randomProx;
@@ -97,15 +92,13 @@ public class Futbol implements Deporte {
     public void setTiempoDeOcupacion(double valorTiempoOcupacion) {
         this.tiempoDeOcupacion = valorTiempoOcupacion;
     }
-    
-    
+
     //ToStrings
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringBuilder SB = new StringBuilder();
         SB.append("Futbol");
-        
+
         return SB.toString();
     }
 

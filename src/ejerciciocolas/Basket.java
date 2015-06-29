@@ -11,6 +11,8 @@ package ejerciciocolas;
  * @author Martin
  */
 public class Basket implements Deporte{
+    private String nombre = "Basket";
+    
     private double randomProx;
     private double randomTiempo;
     
@@ -58,6 +60,12 @@ public class Basket implements Deporte{
 
     
     //Getters and Setters
+
+    public String getNombre() {
+        return nombre;
+    }
+    
+    
     
     public double getRandomProx() {
         return randomProx;
