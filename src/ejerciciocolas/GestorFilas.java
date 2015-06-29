@@ -39,84 +39,122 @@ public class GestorFilas {
         rndDeporte = Math.random();
         double tiempoReloj;
         double tiempoProx;
+        boolean dividido = false; //para dividir la cancha
         
         Fila filaAnterior = listaFilas.get(listaFilas.size()-1);
-        
-        if((filaAnterior.getFinOcupacion() == 0 || filaAnterior.getProxLlegada()<filaAnterior.getFinOcupacion()) || filaAnterior.getEvento().equals("Inicio"))
+        if(!dividido)
         {
-            //Fila Llegada
-            
-            tiempoReloj = filaAnterior.getProxLlegada();
-            
-            nueva = new Fila();
-            nueva.setEvento("Llegada equipo" +  colaLlegadas.size()+1);
-            nueva.setReloj(tiempoReloj);
-            nuevoDeporte = generarNuevoDeporte(rndDeporte);
-            nueva.setDeporte(nuevoDeporte);
-            nueva.setRndDeporte(rndDeporte);
-            tiempoProx = nuevoDeporte.generarTiempoEntreLlegada();
-            nueva.setRndLlegadaDeporte(nuevoDeporte.getRandomProx());
-            nueva.setTiempoEntreLlegadas(tiempoProx);
-            nueva.setProxLlegada(tiempoProx+tiempoReloj);
-            
-            if(filaAnterior.getEstado()=="Ocupado")
+            if((filaAnterior.getFinOcupacion() == 0 || filaAnterior.getProxLlegada()<filaAnterior.getFinOcupacion()) || filaAnterior.getEvento().equals("Inicio"))
             {
-                nueva.setEstado(filaAnterior.getEstado());
-                nueva.setCola(filaAnterior.getCola()+1);
-                nueva.setFinOcupacion(filaAnterior.getFinOcupacion());
-                colaLlegadas.add(nueva);
+                //Fila Llegada
+
+                tiempoReloj = filaAnterior.getProxLlegada();
+
+                nueva = new Fila();
+                nueva.setEvento("Llegada equipo" +  colaLlegadas.size()+1);
+                nueva.setReloj(tiempoReloj);
+                nuevoDeporte = generarNuevoDeporte(rndDeporte);
+                nueva.setDeporte(nuevoDeporte);
+                nueva.setRndDeporte(rndDeporte);
+                tiempoProx = nuevoDeporte.generarTiempoEntreLlegada();
+                nueva.setRndLlegadaDeporte(nuevoDeporte.getRandomProx());
+                nueva.setTiempoEntreLlegadas(tiempoProx);
+                nueva.setProxLlegada(tiempoProx+tiempoReloj);
+
+                if(filaAnterior.getEstado()=="Ocupado")
+                {
+                    //Verificar si ocupado es basket || No se si esta bien
+                    if(filaOcupacion.getDeporte() instanceof Basket && nueva.getDeporte() instanceof Basket)
+                    {
+                        Fila filaOcupacion2;
+                        nueva.setEstado("Ocupado - 2");
+                        nueva.setTiempoOcupacion(nuevoDeporte.generarTiempoDeOcupacion());
+                        nueva.setRndOcupacion(nuevoDeporte.getRandomTiempo());
+                        nueva.setFinOcupacion(tiempoReloj + nuevoDeporte.getTiempoDeOcupacion());
+                        filaOcupacion2 = nueva;
+                        dividido = true;//para indicar que hay 2 equipos de basquet
+                    }
+                    else
+                    {
+                        nueva.setEstado(filaAnterior.getEstado());
+                        nueva.setCola(filaAnterior.getCola()+1);
+                        nueva.setFinOcupacion(filaAnterior.getFinOcupacion());
+                        colaLlegadas.add(nueva);
+                    }
+                }
+                else
+                {
+                    if(filaAnterior.getCola() != 0)
+                    {
+                        nueva.setCola(filaAnterior.getCola()+1);
+                        nueva.setFinOcupacion(filaAnterior.getFinOcupacion());
+                        colaLlegadas.add(nueva);                    
+                    }
+                    else
+                    {
+                        nueva.setEstado("Ocupado");
+                        nueva.setTiempoOcupacion(nuevoDeporte.generarTiempoDeOcupacion());
+                        nueva.setRndOcupacion(nuevoDeporte.getRandomTiempo());
+                        nueva.setFinOcupacion(tiempoReloj + nuevoDeporte.getTiempoDeOcupacion());
+                        filaOcupacion = nueva;
+
+                    }
+
+                } 
+
             }
             else
             {
-              if(filaAnterior.getCola()!=0)
-              {
-                  nueva.setCola(filaAnterior.getCola()+1);
-                  nueva.setFinOcupacion(filaAnterior.getFinOcupacion());
-                  colaLlegadas.add(nueva);
-                  
-              }
-              else
-              {
-                  nueva.setEstado("Ocupado");
-                  nueva.setTiempoOcupacion(nuevoDeporte.generarTiempoDeOcupacion());
-                  nueva.setRndOcupacion(nuevoDeporte.getRandomTiempo());
-                  nueva.setFinOcupacion(tiempoReloj + nuevoDeporte.getTiempoDeOcupacion());
-                  filaOcupacion = nueva;
-                  
-              }
-                
-            } 
-          
+                tiempoReloj = filaAnterior.getFinOcupacion();
+
+                nueva.setEvento("Fin Ocupacion");
+                nueva.setReloj(tiempoReloj);
+
+                nueva.setProxLlegada(filaAnterior.getProxLlegada());
+
+                int sizeCola = filaAnterior.getCola();
+
+                if(sizeCola > 0)
+                {
+                    if(sizeCola == 1)
+                    {
+                        Deporte aux;
+
+                        nueva.setEstado("Ocupado");
+                        filaOcupacion = colaLlegadas.remove(0);
+                        aux = filaOcupacion.getDeporte();
+
+                        nueva.setTiempoOcupacion(aux.generarTiempoDeOcupacion());
+                        nueva.setRndOcupacion(aux.getRandomTiempo());
+                        nueva.setFinOcupacion(tiempoReloj + nueva.getTiempoOcupacion());
+
+                        nueva.setCola(filaAnterior.getCola()-1);
+                    }
+                    else
+                    {
+                        Fila primeroEnCola = colaLlegadas.get(0);
+                        if(primeroEnCola.getDeporte() instanceof Basket)
+                        {
+                            Fila segundoEnCola = colaLlegadas.get(1);
+
+
+                        }
+
+
+
+                    }
+                }
+                else
+                {
+                    nueva.setEstado("Libre");
+                }
+            }
         }
         else
         {
-           tiempoReloj = filaAnterior.getFinOcupacion();
-           
-           nueva.setEvento("Fin Ocupacion");
-           nueva.setReloj(tiempoReloj);
-           
-           nueva.setProxLlegada(filaAnterior.getProxLlegada());
-           
-           if(filaAnterior.getCola()!=0)
-           {
-              Deporte aux;
-               
-              nueva.setEstado("Ocupado");
-              filaOcupacion = colaLlegadas.remove(0);
-              aux = filaOcupacion.getDeporte();
-              
-              nueva.setTiempoOcupacion(aux.generarTiempoDeOcupacion());
-              nueva.setRndOcupacion(aux.getRandomTiempo());
-              nueva.setFinOcupacion(tiempoReloj + nueva.getTiempoOcupacion());
-              
-              nueva.setCola(filaAnterior.getCola()-1);
-           }
-           else
-           {
-               nueva.setEstado("Libre");
-           }
+            //cuando la cancha esta dividida
         }
-         listaFilas.add(nueva); 
+        listaFilas.add(nueva); 
     }
 
     
