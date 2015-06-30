@@ -20,6 +20,7 @@ public class GestorFilas {
     double rndDeporte;
     Fila nueva;
     Fila[] cancha = new Fila[2];
+    Fila filaAnterior;
 
     public GestorFilas() {
 
@@ -35,7 +36,8 @@ public class GestorFilas {
 
     public void generarNuevoEvento() {
         nueva = new Fila();
-        Fila filaAnterior = listaFilas.get(listaFilas.size() - 1);
+        
+        filaAnterior = listaFilas.get(listaFilas.size() - 1);
         
 
         {
@@ -60,6 +62,7 @@ public class GestorFilas {
     }
 
     public void generarNuevaLlegada(Fila filaAnterior) {
+        
         Deporte nuevoDeporte;
         rndDeporte = Math.random();
         double tiempoReloj;
@@ -95,16 +98,19 @@ public class GestorFilas {
                 nueva.setRndOcupacion(filaAnterior.getDeporte().getRandomTiempo());
                 nueva.setFinOcupacion(tiempoReloj + nueva.getTiempoOcupacion());
 
-                cancha[0] = nueva;
+                cancha[0] = filaAnterior;
             }
         } 
         else 
         {
+           if(!filaAnterior.getEstado().equals("Ocupada Completa"))
+           {
             if (cancha[1] == null) 
             {
                 if (colaLlegadas.isEmpty()) 
                 {
-                    if (cancha[0].getDeporte().getNombre().equals("Basket")) 
+                    //  Tira null
+                    if (cancha[0].getDeporte().getNombre().equals("Basket"))
                     {
                         Deporte dep = filaAnterior.getDeporte();
                         Fila aux = new Fila();
@@ -147,9 +153,16 @@ public class GestorFilas {
                 nueva.setEstado(filaAnterior.getEstado());
                 nueva.setFinOcupacion(filaAnterior.getFinOcupacion());
                 nueva.setCola(colaLlegadas.size() + 1);
-                colaLlegadas.add(nueva);  
+                colaLlegadas.add(nueva);
             }
-
+          }
+           else
+           {
+                nueva.setEstado(filaAnterior.getEstado());
+                nueva.setFinOcupacion(filaAnterior.getFinOcupacion());
+                nueva.setCola(colaLlegadas.size() + 1);
+                colaLlegadas.add(nueva);  
+           }
         }
         
 
@@ -157,6 +170,7 @@ public class GestorFilas {
 
     public void generarNuevoFin(Fila filaAnterior) {
         double tiempoReloj;
+        
         tiempoReloj = filaAnterior.getFinOcupacion();
 
         nueva.setEvento("Fin Ocupacion");
@@ -207,7 +221,7 @@ public class GestorFilas {
                     cancha[0] = cancha[1];
                     cancha[1] = null;
 
-                    //      nueva.setCancha(cancha);
+                
                 }
             }
         } else {//cancha vacia
@@ -317,8 +331,7 @@ public class GestorFilas {
                 cancha[0] = null;
                 cancha[1] = null;
                 nueva.setCola(colaLlegadas.size());
-                //  nueva.setCancha(cancha);
-//                nueva.setCancha(cancha);
+
             }
         }
     }

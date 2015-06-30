@@ -11,7 +11,7 @@ package ejerciciocolas;
  * @author Martin
  */
 public class Basket implements Deporte{
-    private String nombre = "Basket";
+    private final String nombre = "Basket";
     
     private double randomProx;
     private double randomTiempo;

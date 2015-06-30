@@ -12,7 +12,7 @@ import ejerciciocolas.Deporte;
  * @author Martin
  */
 public class HandBall implements Deporte{
-    private String nombre = "Handball";
+    private final String nombre = "Handball";
     
     private double randomProx;
     private double randomTiempo;

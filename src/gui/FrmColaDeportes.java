@@ -200,6 +200,7 @@ public class FrmColaDeportes extends javax.swing.JFrame {
             fila[9] = round(filas.get(i).getTiempoOcupacion(),2);
             fila[10] = round(filas.get(i).getFinOcupacion(),2);
 
+
             modelo.addRow(fila);
         }
         

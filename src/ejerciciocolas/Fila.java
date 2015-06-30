@@ -190,36 +190,36 @@ public class Fila {
     public String toString()
     {
         StringBuilder SB = new StringBuilder();
-       // SB.append("Evento: \t");
+        SB.append("Evento: \t");
         SB.append("\n");
         SB.append(this.getEvento());
-//        SB.append(" Reloj: \t");
+        SB.append(" Reloj: \t");
 
         SB.append("\t");
         
         SB.append(round(this.getReloj(),2));
-        //SB.append(" RND Tipo Deporte: \t");
+        SB.append(" RND Tipo Deporte: \t");
         SB.append("\t");
         SB.append(round(this.getRndDeporte(),2));
-        //SB.append(" Tipo Deporte: \t");
+        SB.append(" Tipo Deporte: \t");
         SB.append("\t");
         SB.append(deporte.toString());
-        //SB.append(" Tiempo entre llegadas: \t");
+        SB.append(" Tiempo entre llegadas: \t");
         SB.append("\t");
         SB.append(round(this.getTiempoEntreLlegadas(),2));
-        //SB.append(" Proxima llegada: \t");
+        SB.append(" Proxima llegada: \t");
           SB.append("\t");
         SB.append(round(this.getProxLlegada(),2));
-        //SB.append(" COLA: \t");
+        SB.append(" COLA: \t");
           SB.append("\t");
         SB.append(this.getCola());
-        //SB.append(" RND Ocupacion: \t");
+        SB.append(" RND Ocupacion: \t");
           SB.append("\t");
         SB.append(round(this.getRndOcupacion(),2));
-        //SB.append(" Tiempo Ocupacion: \t");
+        SB.append(" Tiempo Ocupacion: \t");
           SB.append("\t");
         SB.append(round(this.getTiempoOcupacion(),2));
-        //SB.append(" Fin Ocupacion: \t");
+        SB.append(" Fin Ocupacion: \t");
           SB.append("\t");
         SB.append(round(this.getFinOcupacion(),2));
         SB.append("\n");

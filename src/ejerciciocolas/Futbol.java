@@ -11,7 +11,7 @@ package ejerciciocolas;
  */
 public class Futbol implements Deporte {
 
-    private String nombre = "Futbol";
+    private final String nombre = "Futbol";
 
     private double randomProx;
     private double randomTiempo;
