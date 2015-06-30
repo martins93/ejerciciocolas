@@ -36,18 +36,25 @@ public class GestorFilas {
     public void generarNuevoEvento() {
         nueva = new Fila();
         Fila filaAnterior = listaFilas.get(listaFilas.size() - 1);
-       
-        {
-            if (filaAnterior.getEvento().equals("Inicio") || (cancha[0].getFinOcupacion() == 0 || filaAnterior.getProxLlegada() < cancha[0].getFinOcupacion())) {
-                //Llegada
-                
-                this.generarNuevaLlegada(filaAnterior);
-            } else {
-                //Fin Ocupacion
-                 cancha = filaAnterior.getCancha();
-                this.generarNuevoFin(filaAnterior);
-            }
+        
 
+        {
+            if (filaAnterior.getEvento().equals("Inicio"))
+            {
+                this.generarNuevaLlegada(filaAnterior);
+            }
+            else
+            {
+                if(filaAnterior.getProxLlegada()<filaAnterior.getFinOcupacion() || filaAnterior.getFinOcupacion()==0)
+                {
+                    this.generarNuevaLlegada(filaAnterior);
+                }
+                else
+                {
+                    this.generarNuevoFin(filaAnterior);
+                }
+            }
+            
             listaFilas.add(nueva);
         }
     }
@@ -69,95 +76,119 @@ public class GestorFilas {
         nueva.setRndLlegadaDeporte(nuevoDeporte.getRandomProx());
         nueva.setTiempoEntreLlegadas(tiempoProx);
         nueva.setProxLlegada(tiempoProx + tiempoReloj);
-        cancha = filaAnterior.getCancha();
 
-        if (cancha[0] != null) 
+       
+        if (cancha[0] == null) 
         {
-            //Si la cancha esta ocupada por alguien
-            if (filaAnterior.getDeporte().getNombre().equals("Basket") && colaLlegadas.isEmpty() && cancha[0].getDeporte().getNombre().equals("Basket")) 
+            if (colaLlegadas.isEmpty())
             {
-                nueva.setTiempoOcupacion(nuevoDeporte.generarTiempoDeOcupacion());
-                nueva.setRndOcupacion(nuevoDeporte.getRandomTiempo());
-                nueva.setFinOcupacion(tiempoReloj + nuevoDeporte.getTiempoDeOcupacion());
-                nueva.setEstado("Ocupada - 2");
-
-                if (cancha[0].getFinOcupacion() < nueva.getFinOcupacion()) 
+                if (filaAnterior.getDeporte().getNombre().equals("Basket")) 
                 {
-                    cancha[1] = nueva;
-                } else 
+                    nueva.setEstado("Ocupado - 1");
+                } 
+                else 
                 {
-                    Fila aux;
-                    aux = cancha[0];
-                    cancha[0] = nueva;
-                    cancha[1] = aux;
+                    nueva.setEstado("Ocupada Completa");
                 }
-                nueva.setCancha(cancha);
-            } 
-            else 
-            {                
-                Fila[] f = filaAnterior.getCancha();
-                
-                nueva.setEstado(filaAnterior.getEstado());
-                nueva.setCola(filaAnterior.getCola() + 1);
-                nueva.setFinOcupacion(f[0].getFinOcupacion());
-                nueva.setCancha(cancha);
-                colaLlegadas.add(nueva);
+
+                nueva.setTiempoOcupacion(filaAnterior.getDeporte().generarTiempoDeOcupacion());
+                nueva.setRndOcupacion(filaAnterior.getDeporte().getRandomTiempo());
+                nueva.setFinOcupacion(tiempoReloj + nueva.getTiempoOcupacion());
+
+                cancha[0] = nueva;
             }
         } 
         else 
         {
-            if (filaAnterior.getDeporte().getNombre().equals("Basket")) 
+            if (cancha[1] == null) 
             {
-                nueva.setEstado("Ocupada - 1");
-            } 
-            else 
+                if (colaLlegadas.isEmpty()) 
+                {
+                    if (cancha[0].getDeporte().getNombre().equals("Basket")) 
+                    {
+                        Deporte dep = filaAnterior.getDeporte();
+                        Fila aux = new Fila();
+
+                        aux.setTiempoOcupacion(dep.generarTiempoDeOcupacion());
+                        aux.setRndOcupacion(dep.getRandomTiempo());
+                        aux.setFinOcupacion(tiempoReloj + aux.getTiempoOcupacion());
+
+                        if (cancha[0].getFinOcupacion() < aux.getFinOcupacion()) {
+                            cancha[1] = aux;
+                        } else {
+                            Fila cambio;
+                            cambio = cancha[0];
+                            cancha[1] = cambio;
+                            cancha[0] = aux;
+                        }
+
+                        nueva.setFinOcupacion(cancha[0].getFinOcupacion());
+                        nueva.setEstado("Ocupada - 2");
+
+                    } 
+                    else 
+                    {
+                        nueva.setEstado(filaAnterior.getEstado());
+                        nueva.setFinOcupacion(filaAnterior.getFinOcupacion());
+                        nueva.setCola(colaLlegadas.size() + 1);
+                        colaLlegadas.add(nueva);
+                    }
+                }
+                else
+                {
+                    nueva.setEstado(filaAnterior.getEstado());
+                    nueva.setFinOcupacion(filaAnterior.getFinOcupacion());
+                    nueva.setCola(colaLlegadas.size() + 1);
+                    colaLlegadas.add(nueva); 
+               }
+            }
+            else
             {
-                nueva.setEstado("Ocupada Completa");
+                nueva.setEstado(filaAnterior.getEstado());
+                nueva.setFinOcupacion(filaAnterior.getFinOcupacion());
+                nueva.setCola(colaLlegadas.size() + 1);
+                colaLlegadas.add(nueva);  
             }
 
-            nueva.setTiempoOcupacion(nuevoDeporte.generarTiempoDeOcupacion());
-            nueva.setRndOcupacion(nuevoDeporte.getRandomTiempo());
-            nueva.setFinOcupacion(tiempoReloj + nuevoDeporte.getTiempoDeOcupacion());
-            cancha[0] = nueva;
-            nueva.setCancha(cancha);
-
         }
+        
+
     }
 
     public void generarNuevoFin(Fila filaAnterior) {
-        rndDeporte = Math.random();
         double tiempoReloj;
-        cancha = filaAnterior.getCancha();
         tiempoReloj = filaAnterior.getFinOcupacion();
 
         nueva.setEvento("Fin Ocupacion");
         nueva.setReloj(tiempoReloj);
         nueva.setProxLlegada(filaAnterior.getProxLlegada());
 
-        int sizeCola = filaAnterior.getCola();
+        int sizeCola = colaLlegadas.size();
 
         if (cancha[1] != null) {
             if (sizeCola == 0) {
-               nueva.setFinOcupacion(cancha[1].getFinOcupacion());
-               nueva.setEstado("Ocupado - 1");
-               
+                nueva.setFinOcupacion(cancha[1].getFinOcupacion());
+                nueva.setEstado("Ocupada - 1");
+                nueva.setDeporte(filaAnterior.getDeporte());
+
                 cancha[0] = cancha[1];
                 cancha[1] = null;
+
                 
-                nueva.setCancha(cancha);
             } else {   //cola no vacia
                 if (colaLlegadas.get(0).getDeporte().getNombre().equals("Basket")) {
                     Deporte aux;
 
-                    nueva.setEstado("Ocupada - 1");
+                    nueva.setEstado("Ocupada - 2");
                     filaOcupacion = colaLlegadas.remove(0);
                     aux = filaOcupacion.getDeporte();
 
                     nueva.setTiempoOcupacion(aux.generarTiempoDeOcupacion());
                     nueva.setRndOcupacion(aux.getRandomTiempo());
                     nueva.setFinOcupacion(tiempoReloj + nueva.getTiempoOcupacion());
+                    nueva.setDeporte(filaAnterior.getDeporte());
 
-                    nueva.setCola(filaAnterior.getCola() - 1);
+                    nueva.setCola(colaLlegadas.size());
 
                     if (cancha[1].getFinOcupacion() > nueva.getFinOcupacion()) {
                         cancha[0] = nueva;
@@ -167,15 +198,16 @@ public class GestorFilas {
                         cancha[1] = nueva;
                         cancha[0] = aux2;
                     }
-                    nueva.setCancha(cancha);
+                    //       nueva.setCancha(cancha);
                 } else {
                     nueva.setFinOcupacion(cancha[1].getFinOcupacion());
-                    nueva.setEstado("Ocupado - 1");
+                    nueva.setEstado("Ocupada - 1");
+                    nueva.setDeporte(filaAnterior.getDeporte());
 
                     cancha[0] = cancha[1];
                     cancha[1] = null;
-                    
-                    nueva.setCancha(cancha);
+
+                    //      nueva.setCancha(cancha);
                 }
             }
         } else {//cancha vacia
@@ -189,17 +221,17 @@ public class GestorFilas {
                             Deporte dep2;
 
                             aux1 = colaLlegadas.remove(0);
-                            aux2 = colaLlegadas.remove(1);
+                            aux2 = colaLlegadas.remove(0);
                             dep1 = aux1.getDeporte();
                             dep2 = aux2.getDeporte();
 
                             aux1.setTiempoOcupacion(dep1.generarTiempoDeOcupacion());
                             aux1.setRndOcupacion(dep1.getRandomTiempo());
-                            aux1.setFinOcupacion(tiempoReloj + dep1.getTiempoDeOcupacion());
+                            aux1.setFinOcupacion(tiempoReloj + aux1.getTiempoOcupacion());
 
                             aux2.setTiempoOcupacion(dep2.generarTiempoDeOcupacion());
                             aux2.setRndOcupacion(dep2.getRandomTiempo());
-                            aux2.setFinOcupacion(tiempoReloj + dep2.getTiempoDeOcupacion());
+                            aux2.setFinOcupacion(tiempoReloj + aux2.getTiempoOcupacion());
 
                             if (aux1.getFinOcupacion() < aux2.getFinOcupacion()) {
                                 cancha[0] = aux1;
@@ -211,80 +243,89 @@ public class GestorFilas {
 
                             nueva.setEstado("Ocupada - 2");
                             nueva.setTiempoOcupacion(cancha[0].getTiempoOcupacion());
-                            nueva.setFinOcupacion(tiempoReloj + cancha[0].getTiempoOcupacion());
+                            nueva.setFinOcupacion(tiempoReloj + nueva.getTiempoOcupacion());
                             nueva.setRndOcupacion(cancha[0].getRndOcupacion());
-                            nueva.setCancha(cancha);
+                            nueva.setDeporte(filaAnterior.getDeporte());
+                            
+                            nueva.setCola(colaLlegadas.size());
+                 
 
-                        }
-                        else
-                        {
+                        } else {
+                            //El primero en cola es basket y el segundo es otro
+                            
                             Fila aux = colaLlegadas.remove(1);
                             Deporte dep1 = aux.getDeporte();
+                            
                             aux.setTiempoOcupacion(dep1.generarTiempoDeOcupacion());
                             aux.setRndOcupacion(dep1.getRandomTiempo());
-                            aux.setFinOcupacion(tiempoReloj + dep1.getTiempoDeOcupacion());
-                            
+                            aux.setFinOcupacion(tiempoReloj + aux.getTiempoOcupacion());
+
                             cancha[0] = aux;
                             cancha[1] = null;
                             nueva.setEstado("Ocupada Completa");
                             nueva.setTiempoOcupacion(cancha[0].getTiempoOcupacion());
-                            nueva.setFinOcupacion(tiempoReloj + cancha[0].getTiempoOcupacion());
+                            nueva.setFinOcupacion(tiempoReloj + nueva.getTiempoOcupacion());
                             nueva.setRndOcupacion(cancha[0].getRndOcupacion());
-                            nueva.setCancha(cancha);
+                            
+                            nueva.setDeporte(filaAnterior.getDeporte());
+                            nueva.setCola(colaLlegadas.size());
                         }
-                    }
-                    else {
+                    } else {
                         Fila aux = colaLlegadas.remove(0);
                         Deporte dep1 = aux.getDeporte();
                         aux.setTiempoOcupacion(dep1.generarTiempoDeOcupacion());
                         aux.setRndOcupacion(dep1.getRandomTiempo());
-                        aux.setFinOcupacion(tiempoReloj + dep1.getTiempoDeOcupacion());
+                        aux.setFinOcupacion(tiempoReloj + aux.getTiempoOcupacion());
 
                         cancha[0] = aux;
                         cancha[1] = null;
-                        nueva.setEstado("Ocupada - 1");
+                        nueva.setEstado("Ocupada Completa");
                         nueva.setTiempoOcupacion(cancha[0].getTiempoOcupacion());
-                        nueva.setFinOcupacion(tiempoReloj + cancha[0].getTiempoOcupacion());
+                        nueva.setFinOcupacion(tiempoReloj + nueva.getTiempoOcupacion());
                         nueva.setRndOcupacion(cancha[0].getRndOcupacion());
-                        nueva.setCancha(cancha);
-                    }                    
-                }
-                else
-                {
+                        
+                        nueva.setDeporte(filaAnterior.getDeporte());
+                        
+                        nueva.setCola(colaLlegadas.size());
+                    }
+                } else {
                     Fila aux = colaLlegadas.remove(0);
                     Deporte dep1 = aux.getDeporte();
                     aux.setTiempoOcupacion(dep1.generarTiempoDeOcupacion());
                     aux.setRndOcupacion(dep1.getRandomTiempo());
-                    aux.setFinOcupacion(tiempoReloj + dep1.getTiempoDeOcupacion());
+                    aux.setFinOcupacion(tiempoReloj + aux.getTiempoOcupacion());
 
                     cancha[0] = aux;
                     cancha[1] = null;
-                    if(dep1.getNombre().equals("Basket"))
+                    if (dep1.getNombre().equals("Basket")) {
                         nueva.setEstado("Ocupada - 1");
-                    else
+                    } else {
                         nueva.setEstado("Ocupada Completa");
-                    
+                    }
+
                     nueva.setTiempoOcupacion(cancha[0].getTiempoOcupacion());
-                    nueva.setFinOcupacion(tiempoReloj + cancha[0].getTiempoOcupacion());
+                    nueva.setFinOcupacion(tiempoReloj + nueva.getTiempoOcupacion());
                     nueva.setRndOcupacion(cancha[0].getRndOcupacion());
-                    nueva.setCancha(cancha);
+                    
+                    nueva.setDeporte(filaAnterior.getDeporte());
+                    
+                    nueva.setCola(colaLlegadas.size());
                 }
-            }
-            else
-            {
+            } else {
                 nueva.setEstado("Libre");
+                nueva.setDeporte(filaAnterior.getDeporte());
                 cancha[0] = null;
                 cancha[1] = null;
-                nueva.setCancha(cancha);
+                nueva.setCola(colaLlegadas.size());
+                //  nueva.setCancha(cancha);
 //                nueva.setCancha(cancha);
             }
         }
     }
 
     private Deporte generarNuevoDeporte(double random) {
-       
+
         Deporte aux = null;
-        
 
         if (random < 0.33) {
             aux = new Futbol();
@@ -296,13 +337,9 @@ public class GestorFilas {
 
         return aux;
     }
-     
-     
-   public ArrayList<Fila> getListaFilas()
-   {
-       return listaFilas;
-   }
-   
-   
+
+    public ArrayList<Fila> getListaFilas() {
+        return listaFilas;
+    }
 
 }

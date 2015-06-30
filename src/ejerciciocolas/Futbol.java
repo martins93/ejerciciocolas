@@ -43,7 +43,7 @@ public class Futbol implements Deporte {
 
         randomTiempo = Math.sqrt(-2 * Math.log10(rnd1)) * Math.cos(2 * (Math.PI) * rnd2);
 
-        // tiempoDeOcupacion = (90.0/60.0) + (randomTiempo * (10.0/60.0));
+        //tiempoDeOcupacion = (90.0/60.0) + (randomTiempo * (10.0/60.0));
         tiempoDeOcupacion = 20.0;
 
         return tiempoDeOcupacion;
