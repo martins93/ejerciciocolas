@@ -12,7 +12,7 @@ import ejerciciocolas.Deporte;
  * @author Martin
  */
 public class HandBall implements Deporte{
-    private final String nombre = "Handball";
+    private final String nombre = "HandBall";
     
     private double randomProx;
     private double randomTiempo;
@@ -56,6 +56,7 @@ public class HandBall implements Deporte{
         randomTiempo = Math.sqrt(-2 * Math.log10(rnd1)) * Math.cos(2 * (Math.PI) * rnd2);
 
         tiempoDeOcupacion = (80.0/60.0) + (randomTiempo * (20.0/60.0));
+
 
         return tiempoDeOcupacion;
     }

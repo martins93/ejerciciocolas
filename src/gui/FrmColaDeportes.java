@@ -30,10 +30,17 @@ public class FrmColaDeportes extends javax.swing.JFrame {
         modelo.addColumn("Tiempo Entre Llegadas");
         modelo.addColumn("Proxima Llegada");
         modelo.addColumn("Cola");
-        modelo.addColumn("Estado");
-        modelo.addColumn("RND Ocup");
-        modelo.addColumn("Tiempo Ocup");
-        modelo.addColumn("Fin Ocup");
+        modelo.addColumn("Estado - CANCHA 1");
+        modelo.addColumn("RND Ocup - CANCHA 1");
+        modelo.addColumn("Tiempo Ocup - CANCHA 1");
+        modelo.addColumn("Fin Ocup - CANCHA 1");
+        modelo.addColumn("Estado - CANCHA 2");
+        modelo.addColumn("RND Ocup - CANCHA 2");
+        modelo.addColumn("Tiempo Ocup - CANCHA 2");
+        modelo.addColumn("Fin Ocup - CANCHA 2");
+        modelo.addColumn("ACUM Espera - Basket");
+        modelo.addColumn("ACUM Espera - Futbol");
+        modelo.addColumn("ACUM Espera - HandBall");
     }
 
     private DefaultTableModel modelo = new DefaultTableModel();
@@ -76,18 +83,18 @@ public class FrmColaDeportes extends javax.swing.JFrame {
         configuracionLayout.setHorizontalGroup(
             configuracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, configuracionLayout.createSequentialGroup()
-                .addContainerGap(130, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(308, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addComponent(txt_cantidadSim, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_generar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(113, 113, 113))
+                .addContainerGap(316, Short.MAX_VALUE))
         );
         configuracionLayout.setVerticalGroup(
             configuracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(configuracionLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(configuracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt_cantidadSim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -99,17 +106,44 @@ public class FrmColaDeportes extends javax.swing.JFrame {
 
         jTableResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Evento", "Reloj", "RND Dep", "Deporte", "Tiempo Entre Llegadas", "Proxima Llegada", "Cola", "RND Ocup", "Tiempo Ocup", "Fin Ocup"
+                "Evento", "Reloj", "RND Dep", "Deporte", "Tiempo Entre Llegadas", "Proxima Llegada", "Cola", "Estado - CANCHA 1", "RND Ocup - CANCHA 1", "Tiempo Ocup - CANCHA 1", "Fin Ocup - CANCHA 1", "Estado - CANCHA 2", "RND Ocup - CANCHA 2", "Tiempo Ocup - CANCHA 2", "Fin Ocup - CANCHA 2", "ACUM Espera Basket", "ACUM Espera Futbol", "ACUM Espera Handball"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, true, true
+                false, false, false, false, false, false, false, true, false, true, true, true, true, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -127,8 +161,8 @@ public class FrmColaDeportes extends javax.swing.JFrame {
         vectorLayout.setVerticalGroup(
             vectorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vectorLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout contenedorLayout = new javax.swing.GroupLayout(contenedor);
@@ -183,26 +217,54 @@ public class FrmColaDeportes extends javax.swing.JFrame {
         for (int i = 0; i < cantidadSim; i++) {
                 listaFilas.generarNuevoEvento(); 
         }
-        Object [] fila = new Object[11];
+        Object [] fila = new Object[18];
         filas = listaFilas.getListaFilas();
         
         for (int i = 0; i < filas.size(); i++) {
 
             fila[0] = filas.get(i).getEvento();
-            fila[1] = round(filas.get(i).getReloj(),2);
-            fila[2] = round(filas.get(i).getRndDeporte(),2);
+            fila[1] = round(filas.get(i).getReloj(), 2);
+            fila[2] = round(filas.get(i).getRndDeporte(), 2);
             fila[3] = filas.get(i).getDeporte();
-            fila[4] = round(filas.get(i).getTiempoEntreLlegadas(),2);
-            fila[5] = round(filas.get(i).getProxLlegada(),2);
+            fila[4] = round(filas.get(i).getTiempoEntreLlegadas(), 2);
+            fila[5] = round(filas.get(i).getProxLlegada(), 2);
             fila[6] = filas.get(i).getCola();
-            fila[7] = filas.get(i).getEstado();
-            fila[8] = round(filas.get(i).getRndOcupacion(),2);
-            fila[9] = round(filas.get(i).getTiempoOcupacion(),2);
-            fila[10] = round(filas.get(i).getFinOcupacion(),2);
+            fila[7] = filas.get(i).getCancha1().getEstado();
+            fila[8] = round(filas.get(i).getCancha1().getRndOcupacion(), 2);
+            fila[9] = round(filas.get(i).getCancha1().getTiempoOcupacion(), 2);
+            fila[10] = round(filas.get(i).getCancha1().getFinOcupacion(), 2);
+            fila[11] = filas.get(i).getCancha2().getEstado();
+            fila[12] = round(filas.get(i).getCancha2().getRndOcupacion(), 2);
+            fila[13] = round(filas.get(i).getCancha2().getTiempoOcupacion(), 2);
+            fila[14] = round(filas.get(i).getCancha2().getFinOcupacion(), 2);
+            fila[15] = round(filas.get(i).getAcumuladorBasket(),2);
+            fila[16] = round(filas.get(i).getAcumuladorFutbol(),2);
+            fila[17] = round(filas.get(i).getAcumuladorHandBall(),2);
 
-
+            
             modelo.addRow(fila);
         }
+        
+            fila[0] ="-";
+            fila[1] = "-";
+            fila[2] = "-";
+            fila[3] = "-";
+            fila[4] = "-";
+            fila[5] = "-";
+            fila[6] = "-";
+            fila[7] = "-";
+            fila[8] = "-";
+            fila[9] = "-";
+            fila[10] = "-";
+            fila[11] = "-";
+            fila[12] = "-";
+            fila[13] = "-";
+            fila[14] = "-";
+            fila[15] = filas.get(filas.size()-1).getAcumuladorBasket()/listaFilas.getContadorBasket();
+            fila[16] = filas.get(filas.size()-1).getAcumuladorFutbol()/listaFilas.getContadorFutbol();
+            fila[17] = filas.get(filas.size()-1).getAcumuladorHandBall()/listaFilas.getContadorHandBall();
+            
+            modelo.addRow(fila);
         
         jTableResultados.setModel(modelo);
     }//GEN-LAST:event_btn_generarActionPerformed

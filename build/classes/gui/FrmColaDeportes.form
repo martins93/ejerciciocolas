@@ -81,20 +81,20 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="130" max="32767" attributes="0"/>
-                      <Component id="jLabel1" min="-2" pref="136" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="308" max="32767" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="txt_cantidadSim" min="-2" pref="108" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btn_generar" min="-2" pref="127" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+                      <EmptySpace pref="316" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace pref="35" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txt_cantidadSim" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -141,8 +141,8 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" min="-2" pref="237" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="527" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -158,7 +158,7 @@
                 <Component class="javax.swing.JTable" name="jTableResultados">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="10" rowCount="4">
+                      <Table columnCount="18" rowCount="31">
                         <Column editable="false" title="Evento" type="java.lang.Object"/>
                         <Column editable="false" title="Reloj" type="java.lang.Object"/>
                         <Column editable="false" title="RND Dep" type="java.lang.Object"/>
@@ -166,13 +166,61 @@
                         <Column editable="false" title="Tiempo Entre Llegadas" type="java.lang.Object"/>
                         <Column editable="false" title="Proxima Llegada" type="java.lang.Object"/>
                         <Column editable="false" title="Cola" type="java.lang.Object"/>
-                        <Column editable="false" title="RND Ocup" type="java.lang.Object"/>
-                        <Column editable="true" title="Tiempo Ocup" type="java.lang.Object"/>
-                        <Column editable="true" title="Fin Ocup" type="java.lang.Object"/>
+                        <Column editable="true" title="Estado - CANCHA 1" type="java.lang.Object"/>
+                        <Column editable="false" title="RND Ocup - CANCHA 1" type="java.lang.Object"/>
+                        <Column editable="true" title="Tiempo Ocup - CANCHA 1" type="java.lang.Object"/>
+                        <Column editable="true" title="Fin Ocup - CANCHA 1" type="java.lang.Object"/>
+                        <Column editable="true" title="Estado - CANCHA 2" type="java.lang.Object"/>
+                        <Column editable="true" title="RND Ocup - CANCHA 2" type="java.lang.Object"/>
+                        <Column editable="true" title="Tiempo Ocup - CANCHA 2" type="java.lang.Object"/>
+                        <Column editable="true" title="Fin Ocup - CANCHA 2" type="java.lang.Object"/>
+                        <Column editable="true" title="ACUM Espera Basket" type="java.lang.Object"/>
+                        <Column editable="true" title="ACUM Espera Futbol" type="java.lang.Object"/>
+                        <Column editable="true" title="ACUM Espera Handball" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>

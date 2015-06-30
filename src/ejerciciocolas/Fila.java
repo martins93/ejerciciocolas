@@ -19,16 +19,19 @@ public class Fila {
     private double rndDeporte;
     private Deporte deporte;  
     private int cola;
-    private String estado;
     private double acumuladorFutbol, acumuladorBasket, acumuladorHandBall;
+    private int idFila;
 
+    
     private double rndLlegadaDeporte;
     private double tiempoEntreLlegadas;
-    private double rndOcupacion;
-    private double tiempoOcupacion;
-    private double finOcupacion;
     private double proxLlegada;
-   // private Fila[] cancha;
+    
+    private Cancha cancha1;
+    private Cancha cancha2;
+    
+    
+
     
     public Fila()
     {
@@ -42,13 +45,13 @@ public class Fila {
         this.evento = evento;
         this.reloj = reloj;
         this.cola = cola;
-        this.estado = estado;
         this.deporte = deporte;
         this.rndDeporte = rndDeporte;
         this.tiempoEntreLlegadas = deporte.generarTiempoEntreLlegada();
         this.rndLlegadaDeporte = deporte.getRandomProx();
         this.proxLlegada = tiempoEntreLlegadas;
-       // this.cancha = new Fila[2];
+        this.cancha1 = new Cancha();
+        this.cancha2 = new Cancha();
     }
 
     
@@ -74,16 +77,6 @@ public class Fila {
     public double getRndDeporte() {
         return rndDeporte;
     }
-/*
-    public Fila[] getCancha() {
-        return cancha;
-    }
-
-    public void setCancha(Fila[] cancha) {
-        this.cancha = cancha;
-    }
-    */
-    
 
     public void setRndDeporte(double rndDeporte) {
         this.rndDeporte = rndDeporte;
@@ -95,14 +88,6 @@ public class Fila {
 
     public void setCola(int cola) {
         this.cola = cola;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 
     public double getAcumuladorFutbol() {
@@ -153,30 +138,6 @@ public class Fila {
         this.tiempoEntreLlegadas = tiempoEntreLlegadas;
     }
 
-    public double getRndOcupacion() {
-        return rndOcupacion;
-    }
-
-    public void setRndOcupacion(double rndOcupacion) {
-        this.rndOcupacion = rndOcupacion;
-    }
-
-    public double getTiempoOcupacion() {
-        return tiempoOcupacion;
-    }
-
-    public void setTiempoOcupacion(double tiempoOcupacion) {
-        this.tiempoOcupacion = tiempoOcupacion;
-    }
-
-    public double getFinOcupacion() {
-        return finOcupacion;
-    }
-
-    public void setFinOcupacion(double finOcupacion) {
-        this.finOcupacion = finOcupacion;
-    }
-
     public double getProxLlegada() {
         return proxLlegada;
     }
@@ -184,6 +145,67 @@ public class Fila {
     public void setProxLlegada(double proxLlegada) {
         this.proxLlegada = proxLlegada;
     }
+
+    public Cancha getCancha1() {
+        return cancha1;
+    }
+
+    public void setCancha1(Cancha cancha1) {
+        this.cancha1 = cancha1;
+    }
+
+    public Cancha getCancha2() {
+        return cancha2;
+    }
+
+    public void setCancha2(Cancha cancha2) {
+        this.cancha2 = cancha2;
+    }
+
+    public int getIdFila() {
+        return idFila;
+    }
+
+    public void setIdFila(int idFila) {
+        this.idFila = idFila;
+    }
+    
+    
+    
+    public double getCanchaMenorTiempoOcupacion()
+    {
+        double menor=0.0;
+        
+        if(cancha1!=null && cancha1.getFinOcupacion()!=0)
+        {
+            if(cancha2.getFinOcupacion()!=0)
+            {
+                if(cancha1.getFinOcupacion()<cancha2.getFinOcupacion())
+                    menor = cancha1.getFinOcupacion();
+                else
+                    menor = cancha2.getFinOcupacion();
+            }
+            menor = cancha1.getFinOcupacion();
+        }
+        else if(cancha2!=null && cancha2.getFinOcupacion()!=0)
+            menor = cancha2.getFinOcupacion();
+        
+        return menor;
+    }
+    
+    public boolean estanAmbasOcupadas()
+    {
+        boolean flag = false;
+        if(cancha1.getDeporteEnCancha()!=null && cancha2.getDeporteEnCancha()!=null)
+          flag=true;
+        
+        return flag;
+    }
+    
+    
+    
+    
+    
     
     
     @Override
@@ -215,13 +237,6 @@ public class Fila {
         SB.append(this.getCola());
         SB.append(" RND Ocupacion: \t");
           SB.append("\t");
-        SB.append(round(this.getRndOcupacion(),2));
-        SB.append(" Tiempo Ocupacion: \t");
-          SB.append("\t");
-        SB.append(round(this.getTiempoOcupacion(),2));
-        SB.append(" Fin Ocupacion: \t");
-          SB.append("\t");
-        SB.append(round(this.getFinOcupacion(),2));
         SB.append("\n");
         
         return SB.toString();
