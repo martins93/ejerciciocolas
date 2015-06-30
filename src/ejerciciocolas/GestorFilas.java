@@ -118,6 +118,7 @@ public class GestorFilas {
                         aux.setTiempoOcupacion(dep.generarTiempoDeOcupacion());
                         aux.setRndOcupacion(dep.getRandomTiempo());
                         aux.setFinOcupacion(tiempoReloj + aux.getTiempoOcupacion());
+                        aux.setDeporte(dep);
 
                         if (cancha[0].getFinOcupacion() < aux.getFinOcupacion()) {
                             cancha[1] = aux;
